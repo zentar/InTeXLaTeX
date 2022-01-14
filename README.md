@@ -1,131 +1,113 @@
-# In-TeX/LaTeX 简介
+# In-TeX/LaTeX
 
-In-TeX/LaTeX 是基于 LaTeX 排版系统、面向 InDesign 提供公式排版解决方案的脚本程序，它有如下特点：
+In-TeX/LaTeX is a script program based on the LaTeX typesetting system that provides formula typesetting solutions for InDesign. It has the following characteristics:
 
-1. 跨平台性：这个解决方案主要依赖跨平台的 LaTeX 系统，在 InDesign 里采用 JavaScript 即 Adobe 的 ExtendScript 开发，保证了跨平台，不管是 Windows 和 Mac 系统都能使用。
-2. 运行速度：因为公式的生成完全依赖 LaTeX 编译，所以 LaTeX 编译的速度很大程度上决定了脚本运行的快慢，为此本解决方案还专门提供了智能切换引擎的方式，生成公式时尽可能采用更快的 pdflatex 引擎编译，公式中含有中文时使用支持中文的 xelatex 引擎编译。而且也提供支持编译速度最快的 ApTeX (Asiatic pTeX) 引擎(platex-ng 的新命名)。
-3. 使用便捷：具有插入转换、获取修改，代码还原，批处理、公式调整等功能，并提供使用 LaTeX 模版方式，是本解决方案的一大特色，通过自定义模版应付更复杂的 LaTeX 应用场景。
+    Cross-platform: This solution mainly relies on the cross-platform LaTeX system. InDesign is developed using JavaScript, Adobe's ExtendScript, to ensure cross-platform use, whether it is Windows or Mac systems.
 
-4. 拓展性：本解决方案不仅适用于数理化公式排版，LaTeX 有着丰富的宏包资源，发挥你的想象，在 InDesign 里直接把 LaTeX 代码转换为 PDF 输出结果插入，各种数据图表、作图等就呈现在你的 InDesign 版面中。
+    Running speed: Because the generation of formulas is completely dependent on LaTeX compilation, the speed of LaTeX compilation largely determines the speed of script running. For this reason, this solution also provides a way to intelligently switch the engine. Fast pdflatex engine compilation, when the formula contains Chinese, use the xelatex engine that supports Chinese. It also provides support for the fastest compiling ApTeX (Asiatic pTeX) engine (new name for platex-ng).
 
-5. 版本限制：本解决方案主要是采用 JavaScript 语言开发，界面完全依赖 Adobe ExtendScript ScriptUI，在不同系统平台、不同 InDesign 版本上会有些小差异，甚至带来操作表现差异上的困惑，所以特别限定了至少 InDesign CS6 环境来运行。
+    Ease of use: It has functions such as insert conversion, acquisition and modification, code restoration, batch processing, formula adjustment, etc., and provides a way to use LaTeX templates, which is a major feature of this solution, and can cope with more complex LaTeX application scenarios through custom templates.
 
+    Extensibility: This solution is not only suitable for typesetting of mathematical, physical and chemical formulas, but LaTeX has rich macro package resources. Use your imagination to directly convert LaTeX code into PDF output results in InDesign, and insert various data charts, drawings, etc. Rendered in your InDesign layout.
 
-和别人的公式排版解决方案有什么不同：
+    Version restrictions: This solution is mainly developed in JavaScript language, and the interface completely relies on Adobe ExtendScript ScriptUI. There will be some small differences in different system platforms and different InDesign versions, and even cause confusion in operation performance differences, so it is specially limited to at least InDesign CS6 environment to run.
 
-1. 基于 LaTeX ，完美的公式。
-2. 跨平台。至少国内的其他解决方案只是给出 PC 解决。
-3. 更多的拓展性。基于 LaTeX 就可以在数学公式排版之外多加很多拓展，物理、化学公式之类的排版也是可行的，而且 LaTeX 宏包异常丰富，甚至可以把作图功能集成到 InDesign 里，自动转化数据为图表等，这些是 MathType 无法企及的功能。所以，即使你已经在用了别人的 MathType 公式排版解决方案，但别人那里没有这方面的功能，选择本方案也是一种很好的补充。
-4. 与以前的 IDMath 一类日本人做出的免费的也是基于 LaTeX 的公式工具相比，本解决方案有更多的功能和人性化设计操作，我计划以后有更多功能的丰富拓展，这些足以让你感到惊喜。
+How is it different from others' formula typesetting solutions:
 
+    Based on LaTeX , perfect formula.
+    Cross-platform. At least other domestic solutions just give PC solutions.
+    More extensibility. Based on LaTeX, a lot of extensions can be added besides the typesetting of mathematical formulas. Typesetting such as physical and chemical formulas is also feasible, and the LaTeX macro package is very rich, and even the drawing function can be integrated into InDesign to automatically convert data into charts, etc. , these are features that MathType cannot match. So, even if you're already using someone else's MathType formula typesetting solution, but others don't have that functionality, choosing this solution is a great addition.
+    Compared with the free formula tools based on LaTeX made by Japanese like IDMath, this solution has more functions and user-friendly design operations. You are pleasantly surprised.
 
+In-TeX/LaTeX installation and use
+1. LaTeX system environment installation
+Windows users:
 
-# In-TeX/LaTeX 安装和使用
+No matter which LaTeX distribution you are using, but at least your LaTeX environment must have Perl and Ghostscript installed, the version requirements are at least Perl5, and Ghostscript must meet >= 8.0. If your installed LaTeX system does not have these or the version is too low, please Install or upgrade the new version. If there is no pdfcrop in your LaTeX environment, you need to install it yourself. As long as the LaTeX distribution is not too old, it usually comes with pdfcrop. For those who are inconvenient to install or upgrade the latest version of LaTeX, especially those old users of the CTeX suite, such as CTeX 2.4.6, I recommend using TeXLive green made by netizens and containing relatively new and not too old ctex packages Installed version, such as TeXLive2016 green version (introduction and download will be attached later), because this solution does not rely on the environment variables of LaTeX in the system to run under Windows, it is a good choice for users who do not like to toss to use the green version of TeXLive.
 
-## 一、LaTeX 系统环境安装
+In short, there is no special case to recommend installing the TeXLive release version, and it is the latest version (Note: TeXLive2018 no longer supports XP system), and it is very convenient to update and maintain various macro packages. If you are familiar with the LaTeX system, you can completely customize your LaTeX environment. For example, choose W32TeX, and install and control the size of the volume according to your needs. The aforementioned Perl and Ghostscript environments must also be installed and meet the version requirements.
+Mac users:
 
-### Windows 用户：
+It is recommended to install MacTeX 2018. The latest ctex macro package has been updated, adding automatic recognition support for the font library in the new OSX system.
+2. In-TeX/LaTeX script installation
 
-不管你是用的哪个 LaTeX 发行版本，但至少你的 LaTeX 环境必须安装有 Perl 和 Ghostscript，版本要求至少 Perl5，Ghostscript 需满足 >= 8.0，如果你已安装的 LaTeX 系统没有这些或者版本太低，请安装或者升级新版本，如果你的 LaTeX 环境里没有 pdfcrop 还需要自行安装，只要不是太老的 LaTeX 发行版本一般都是自带 pdfcrop 。对于不方便安装或升级 LaTeX 最新发行版本的，特指那些 CTeX 套件老用户，如 CTeX 2.4.6 一类的老老用户，我建议使用网友制作的、包含比较新不太旧 ctex 宏包的 TeXLive 绿色安装版本，如 TeXLive2016 绿色版本(后附有介绍和下载)，因 Windows 下本解决方案不依赖 LaTeX 在系统中的环境变量来运行，对于不喜欢折腾的用户使用绿色版本 TeXLive 是个很好的选择。
+After unzipping, copy the InTeXLaTeX folder directly to the
 
-总之，没有特殊情况优先推荐安装 TeXLive 发行版本，而且是最新版本的(注：TeXLive2018 已不支持 XP 系统)，各种宏包更新维护都很方便。如果你对 LaTeX 系统很熟悉，完全可以定制你的 LaTeX 环境，如选择 W32TeX，根据你的需要自行安装控制体积的大小，前面提到的 Perl 和 Ghostscript 环境同样也是必须安装、满足版本要求的。
+InDesign program installation path\Scripts\Scripts Panel\
 
-### Mac 用户：
+(For example, using IDCS6, it may be C:\Program Files (x86)\Adobe\Adobe InDesign CS6\Scripts\Scripts Panel\ under PC, /Applications/Adobe InDesign CS6/Scripts/Scripts Panel/ under Mac)
 
-推荐安装 MacTeX 2018 即可，最新的 ctex 宏包有所更新，增加了对 OSX 新版系统中文字库的自动识别支持。
+Then start your InDesign. Find the script panel in Window-Utilities and open it. Open Application-InTeXLaTeX in the panel. Find the InTeXLaTeX.jsx file and double-click to run it. Follow the prompts to configure the LaTeX engine and play with LaTeX formulas. .
 
-## 二、In-TeX/LaTeX 脚本安装
+Free users: The authorization file of the free version is automatically generated, and the functions that require payment cannot be used.
 
-解压缩后把 InTeXLaTeX 文件夹直接拷贝至你系统上的
+Paid users: It needs to run under a special plug-in authorization environment, and use another authorization file to run the full function. After paying for the purchase, please contact the author for related operation matters.
+3. Use of In-TeX/LaTeX
 
- InDesign程序安装路径\Scripts\Scripts Panel\ 
+It is very simple to use, just follow the prompts. For more functions, please refer to the provided video demonstration and template (provided in the technical support QQ group Guangzhiyuan InDesign 1 group 10569122 sharing). The version without paid license does not support the functions of batch conversion formula and adjustment formula (Note: The free version only supports automatic adjustment of the current row formula), and there will be a prompt when the operation involves restricted functions. If you need these functions, please contact the author to purchase the license. If the free version has met your needs and you are looking forward to more complete functional upgrades, click the help button in the interface, scan the QR code and Alipay to sponsor it for 9.97 ￥! The most important thing is to join the InTeXLaTeX technical support group Guangzhiyuan InDesign 1 group 10569122 to get instant help, feedback questions and discuss technology. After all, LaTeX is not a simple typesetting software. The more you know, the more fun, the less confusion and the less detours.
+Fourth, LaTeX resources
+Forums and websites, etc.
 
-（例如使用 IDCS6，则  PC 下可能是 C:\Program Files (x86)\Adobe\Adobe InDesign CS6\Scripts\Scripts Panel\，Mac 下是 /Applications/Adobe InDesign CS6/Scripts/Scripts Panel/ ）
+http://bbs.ctex.org/forum.php Chinese TeX Community
 
-下即可，然后启动你的 InDesign 在窗口－实用程序 找到 脚本面板打开，在面板里依次打开 应用程序－InTeXLaTeX，找到 InTeXLaTeX.jsx 文件双击即运行，按提示配置 LaTeX 引擎后即可玩转 LaTeX 公式。
+http://www.latexstudio.net LaTeX Studio
 
-免费用户：自动生成免费版本的授权文件，不能使用需要付费的功能。
+https://zhuanlan.zhihu.com/LaTeX All about TeXnique (things that can improve your understanding of TeX)
 
-付费用户：需要在特别插件授权环境下运行，使用另外的授权文件运行完全功能，付款购买后请联系作者相关操作事宜。
+https://weibo.com/latexstudio LaTeX technology typesetting Sina Weibo
 
-## 三、In-TeX/LaTeX 的使用
+https://weibo.com/cooldtp @ Guangzhiyuan Skin Sina Weibo (the latest information about this solution and InDesign)
 
-使用很简单，按提示操作即可，更多功能参照提供的视频演示和模版(技术支持QQ群 广之源 InDesign 1群 10569122 共享里提供)。没有付费授权的版本不支持批处理转换公式和调整公式的功能(注：免费版本仅支持当前行公式自动调整)，操作涉及被限制的功能会有提示，需要这些功能的请联系作者购买授权，如果免费版本已经满足你的需求并期待更完善的功能升级，点击界面当中的帮助按钮，扫一扫二维码支付宝赞助一下 9.97￥！最重要的是加入 InTeXLaTeX 技术支持群 广之源 InDesign 1群 10569122，获取即时的帮助，反馈问题和讨论技术。LaTeX 毕竟是不简单的排版软件，多知道一些乐趣多一些，少些困惑少走弯路。
+InTeXLaTeX official technical support QQ group: Guangzhiyuan InDesign 1 group 10569122
 
-## 四、LaTeX 资源
+LaTeX technical exchange 5000 people QQ group (91940767) (pay to join the group, there are many LaTeX technical masters to communicate)
+LaTeX Chinese data related
 
-### 论坛及网站等
-
-http://bbs.ctex.org/forum.php  中文TeX社区
-
-http://www.latexstudio.net LaTeX工作室
-
-https://zhuanlan.zhihu.com/LaTeX  All about TeXnique（能提升你对TeX理解的东西）
-
-https://weibo.com/latexstudio LaTeX科技排版 新浪微博
-
-https://weibo.com/cooldtp @广之源Skin 新浪微博(关于本解决方案及 InDesign 相关的最新资讯发布)
-
-InTeXLaTeX 官方技术支持 QQ 群： 广之源 InDesign 1群 10569122
-
-LaTeX技术交流5000人QQ群（91940767）(需付费入群，有很多 LaTeX 技术高手可交流)
-
-### LaTeX 中文资料相关
-
-lshort 中文版、LaTeX 入门(刘海洋)、LaTeX2e完全学习手册 第二版（胡伟）等。
-
-### TeXLive／MacTeX 等下载
-
-#### 1、TeX套装下载
+lshort Chinese version, Introduction to LaTeX (Liu Haiyang), LaTeX2e Complete Learning Manual Second Edition (Hu Wei), etc.
+TeXLive/MacTeX etc. download
+1. TeX package download
 
 http://www.latexstudio.net/page/texsoftware
+2. Download the green version TeXLive
 
-#### 2、绿色版本 TeXLive 下载
-
-texlive2018+sumatrapdf(32bit)+texstudio(32bit)便携版百度网盘下载：
+texlive2018+sumatrapdf(32bit)+texstudio(32bit) portable version Baidu network disk download:
 
 https://pan.baidu.com/s/1ZC7Ivg1cI64-Jl6FhP-irA
 
-密码：ks13
+Password: ks13
 
-TeXLive 2016 ISO 绿色免安装版本 for windows 介绍：
+Introduction of TeXLive 2016 ISO green free installation version for windows:
 
 http://bbs.ctex.org/forum.php?mod=viewthread&tid=152717
 
-TeXLive 2016 ISO 绿色免安装版本 for windows 百度网盘下载(请选择 /TeX 文件夹下的 TeXLIve2016.iso.xz 下载，相关信息参照 TeXLive2016.txt 文件的说明)：
+TeXLive 2016 ISO green free installation version for windows Baidu network disk download (please select TeXLIve2016.iso.xz under the /TeX folder to download, please refer to the description of the TeXLive2016.txt file for related information):
 
 https://pan.baidu.com/s/1brg3hj5
+3. W32TeX download
 
-#### 3、W32TeX 下载
-
-http://w32tex.org/index-zh.html
-
-#### 4、ApTeX (Asiatic pTeX／ptex-ng) 项目
+http://w32tex.org/index-en.html
+4. ApTeX (Asiatic pTeX/ptex-ng) project
 
 https://github.com/clerkma/ptex-ng
 
 https://github.com/clerkma/ptex-ng-dist
+5. Download Perl & Ghostscript
 
-#### 5、Perl & Ghostscript 下载
+ActivePerl (please pay attention to the checked options when installing, it is not recommended to install the accompanying editor): https://www.activestate.com/activeperl/downloads
 
-ActivePerl (安装时请注意有勾选的选项，不推荐安装附带的编辑器)：https://www.activestate.com/activeperl/downloads
+Ghostscript: https://www.ghostscript.com/download/gsdnld.html
 
-Ghostscript：https://www.ghostscript.com/download/gsdnld.html
+Finally, I especially recommend a free tool that can capture OCR formula pictures as LaTeX formula codes - Mathpix, both Mac and Win versions are available, allowing you to enter formulas with less effort:
 
-最后特别推荐一款可抓屏 OCR 公式图片为 LaTeX 公式代码的免费工具——Mathpix，Mac 及 Win 版本均有，让你录入公式事半功倍：
-
- https://www.mathpix.com/
-
-#### 6、在 CTEX 论坛发布的链接（用于更新）
+https://www.mathpix.com/
+6. Links posted on the CTEX forum (for updates)
 
 http://bbs.ctex.org/forum.php?mod=viewthread&tid=155312
 
+PUB@September 1, 2018 By Skin in Nanning
 
+Sina Weibo: @ Guangzhiyuan Skin
 
-PUB@2018年9月1日 By Skin 于南宁
+Contact: QQ150062840
 
-新浪微博：@广之源Skin
-
-联系方式：QQ150062840
-
-技术支持：QQ群10569122
+Technical support: QQ group 10569122 
